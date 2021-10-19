@@ -25,7 +25,7 @@ function queSalio(num1, num2, num3, num4, num5) {
     alert(" GENERALA SERVIDA");
     return "ganaste";
   }else{
-    alert("no sacaste generala");
+    alert("no sacaste generala servida");
     return "perdiste"
   }
 }
