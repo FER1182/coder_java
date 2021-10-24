@@ -37,10 +37,10 @@ class Mascotas {
     this.castrado = castrado;
     this.acumulado=acumulado;
 
-    bio = () => {
+    function bio () {
       console.log("esta mascota se llama" + this.nombre + "y tiene " + this.edad + " anos");
     }
-    puntos=(valor)=>{
+    function puntos(valor){
         let puntaje=valor*3;
         this.acumulado+=
         console.log("te ganaste" + puntaje + " puntos y tenes " + this.acumulado +" puntos acumulados");
@@ -67,7 +67,7 @@ const mila =new Mascotas("mila","perro","fulanito gonzales",3,false);
 console.log(mila);
 const otra =new Mascotas("simba","gato","yael roufe",5,true);
 
-const crarMascota = () => {
+function crearMascota() {
   let nombreMascota=prompt("ingresa el nombre de tu mascota");
   let tipoMascota=prompt("que tipo de mascota es");
   let nombreDueno=prompt("como te llamas");
@@ -79,3 +79,5 @@ const crarMascota = () => {
   console.log(mascota2.bio());
 
 }
+
+  
