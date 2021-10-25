@@ -24,7 +24,7 @@ class Producto {
     };
   }
 }
-
+let listaProductos = [];
 const crearProducto = () => {
   let codigoProducto = prompt("ingrese el codigo del producto");
   let tituloProducto = prompt("ingrese el titulo del producto");
@@ -33,7 +33,7 @@ const crearProducto = () => {
   let descripcionProducto = prompt("ingrese una descripcion del producto");
   let stockProducto = 0;
 
-  let producto1 = new Producto(
+  let producto = new Producto(
     codigoProducto,
     tituloProducto,
     categoriaProducto,
@@ -41,10 +41,69 @@ const crearProducto = () => {
     descripcionProducto,
     stockProducto
   );
-
-  console.log(producto1.productoAgregado());
-  console.log(producto1.ingresoStock(10));
-  console.log(producto1.stock);
-  console.log(producto1.ingresoStock(parseFloat(prompt("que cantidad ingreso"))));
-  console.log("quedaron en stock "+producto1.stock);
+  listaProductos.push(producto);
 };
+listaProductos.push(
+  new Producto("27120", "camisa loly", "camias", 1500, "camisa manga larga")
+);
+listaProductos.push(
+  new Producto("27100", "camisa juana", "camias", 1100, "camisa manga corta")
+);
+listaProductos.push(
+  new Producto("27180", "camisa manta", "camias", 1300, "camisa sin manga")
+);
+listaProductos.push(
+  new Producto(
+    "27130",
+    "camisa roland",
+    "camias",
+    1250,
+    "camisa manga larga con puntilla"
+  )
+);
+listaProductos.push(
+  new Producto("27125", "camisa topa", "camias", 1550, "camisa manga ancha")
+);
+listaProductos.push(
+  new Producto("27123", "camisa shura", "camias", 1900, "camisa manga 3/4")
+);
+listaProductos.push(
+  new Producto(
+    "27110",
+    "camisa palm",
+    "camias",
+    1000,
+    "camisa con cuello redondo"
+  )
+);
+
+console.log(listaProductos);
+
+ordenar = (forma) => {
+  if (forma == "mayor") {
+    listaProductos.sort((a, b) => {
+      if (a.codigo > b.codigo) {
+        return -1;
+      }
+      if (a.codigo < b.codigo) {
+        return 1;
+      }
+      return 0;
+    });
+  } else {
+    listaProductos.sort((a, b) => {
+      if (a.codigo > b.codigo) {
+        return 1;
+      }
+      if (a.codigo < b.codigo) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+};
+ordenar("mayor");
+
+
+console.log(listaProductos);
+
