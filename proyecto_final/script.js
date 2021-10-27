@@ -1,4 +1,5 @@
 class Producto {
+  //crea el objeto del producto
   constructor(codigo, titulo, categoria, precio, descripcion, stock) {
     this.codigo = codigo;
     this.titulo = titulo;
@@ -6,10 +7,11 @@ class Producto {
     this.precio = precio;
     this.descripcion = descripcion;
     this.stock = stock;
-
+//metodo para informar que el producto fue agregado
     this.productoAgregado = () => {
       console.log("el producto " + this.titulo + " fue agregado con exito");
     };
+//metodo para sumar stock a un producto    
     this.ingresoStock = (valor) => {
       this.stock = this.stock + valor;
       console.log(
@@ -17,6 +19,7 @@ class Producto {
       );
       return this.stock;
     };
+//metodo para cuando se hace una venta resta del stock    
     this.venta = (cantidad) => {
       this.stock = this.stock - cantidad;
       precioTotal = cantidad * this.precio;
@@ -24,15 +27,25 @@ class Producto {
     };
   }
 }
+
+//creo un array de productos
 let listaProductos = [];
+//pido al usuario la informacion para crear el producto (cada propiedad del producto)
 const crearProducto = () => {
   let codigoProducto = prompt("ingrese el codigo del producto");
   let tituloProducto = prompt("ingrese el titulo del producto");
   let categoriaProducto = prompt("ingrese la categoria del producto");
-  let precioProducto = parseFloat(prompt("ingrese el precio del producto"));
+  
+  //hago una validacion para que no deje poner un precio menor a cero
+  let precioProducto=0;
+  do{
+  precioProducto = parseFloat(prompt("ingrese el precio del producto (tiene que ser mayor a cero)"));
+  }while(precioProducto<0);
+
   let descripcionProducto = prompt("ingrese una descripcion del producto");
   let stockProducto = 0;
 
+  //crea el producto nuevo apartir del Objetio Producto
   let producto = new Producto(
     codigoProducto,
     tituloProducto,
@@ -41,12 +54,14 @@ const crearProducto = () => {
     descripcionProducto,
     stockProducto
   );
+
+  //agregar el nuevo producto al final del array
   listaProductos.push(producto);
 };
 
 
 console.log(listaProductos);
-
+//ordena la informacion por codigo del producto 
 ordenar = (forma) => {
   if (forma == "mayor") {
     listaProductos.sort((a, b) => {
@@ -72,6 +87,8 @@ ordenar = (forma) => {
 };
 ordenar("mayor");
 console.log(listaProductos);
+
+//busca los productos que cumplan la condicion  de que el precio sea menor a 1200
 
 let buscaPorPrecio = listaProductos.filter(obj => obj.precio < 1200);
 console.log(buscaPorPrecio);
