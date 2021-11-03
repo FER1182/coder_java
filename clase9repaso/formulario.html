@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>after validacion de formulario</title>
+    <style>
+      #leer,
+      #futbol,
+      #netflix,
+      #maraton {
+        display: none;
+      }
+      .error {
+        border: 2px solid red;
+        color: red;
+      }
+      .valido {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="formulario">
+        <h1>agrega tus datos</h1>
+        <div class="form-field">
+          <!--<label for="usuario"></label>-->
+          <input
+            type="text"
+            id="usuario"
+            placeholder="cual es tu nombre"
+            autocomplete="off"
+          />
+          <small></small>
+        </div>
+        <div class="form-field">
+          <input
+            type="text"
+            id="email"
+            placeholder="cual es tu mail"
+            autocomplete="off"
+          />
+          <small></small>
+        </div>
+        <div class="form-field">
+          <select id="pasatiempos">
+            <option value="1">leer</option>
+            <option value="2">jugar al futbol</option>
+            <option value="3">mirar netflix</option>
+            <option value="4">correr maratones</option>
+          </select>
+        </div>
+        <!--van a aparecer segun el pasatiempo elegido-->
+        <div class="form-field" id="leer">
+          <input
+            type="text"
+            id="libro"
+            placeholder="cual es tu libro favorito"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-field" id="futbol">
+          <input
+            type="text"
+            id="equipo"
+            placeholder="cual es tu equipo favorito"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-field" id="netflix">
+          <input
+            type="text"
+            id="serie"
+            placeholder="cual es tu serie favorito"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-field" id="maraton">
+          <input
+            type="text"
+            id="maraton"
+            placeholder="cual es tu maraton favorito"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-field">
+            <button type="submit" id="btn">
+                enviar
+            </button>
+          </div>
+      </form>
+    </div>
+    <script src="./formulario.jsS"></script>
+  </body>
+</html>
