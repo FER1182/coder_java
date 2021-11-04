@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>after validacion de formulario</title>
+    <style>
+      .error {
+        border: 2px solid red;
+        color: red;
+        font-size: 25px;
+      }
+      .valido {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="formulario">
+        <h1>agrega tus datos</h1>
+        <div class="form-field">
+          <input
+            type="text"
+            id="usuario"
+            placeholder="cual es tu nombre"
+            autocomplete="off"
+          />
+          <small></small>
+        </div>
+        <div class="form-field">
+          <input
+            type="email"
+            id="email"
+            placeholder="cual es tu mail"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-field">
+          <button type="submit" id="btn">enviar</button>
+        </div>
+      </form>
+      <div>
+        <label id="userok"></label>
+      </div>
+    </div>
+    <script src="./formulario.js"></script>
+  </body>
+</html>
