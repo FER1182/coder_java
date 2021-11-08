@@ -1,3 +1,17 @@
+/***********************
+  ENTIDADES/ LAS CLASES
+ **********************/
+  class Usuario {
+    constructor(nombre, apellido,dni, mail, pass) {
+      this.nombre=nombre;
+      this.apellido=apellido;
+      this.dni=dni;
+      this.mail=mail;
+      this.pass=pass;
+      this.listaNegra = true;
+    }
+  }
+
 class Producto {
   //crea el objeto del producto
   constructor(codigo, titulo, categoria, precio, descripcion, stock) {
@@ -28,8 +42,43 @@ class Producto {
   }
 }
 
+/***********************
+      VARIABLES
+ **********************/
+
+
 //creo un array de productos
 let listaProductos = [];
+let usuarios=[];
+
+/***********************
+      FUNCIONES
+ **********************/
+
+const crearUsuario = () => {
+  
+  let nombre = document.querySelector("#nombre").value;
+  let nombre = document.querySelector("#apellido").value;
+  let dni = document.querySelector("#dni").value;
+  let mail = document.querySelector("#mail").value;
+  let pass = document.querySelector("#pass").value;
+
+  const usuario = new Usuario(nombre, apellido,dni, mail, pass);
+  
+  let listaUsuarios;
+
+  if (localStorage.getItem("listaUsuarios") != null) {
+    lista = JSON.parse(localStorage.getItem("listaUsuarios"));
+    lista.push(usuario);
+    localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+  }
+  listaUsuarios.push(usuario);
+
+  return usuario;
+  
+};
+
+
 //pido al usuario la informacion para crear el producto (cada propiedad del producto)
 const crearProducto = () => {
   let codigoProducto = prompt("ingrese el codigo del producto");
@@ -85,6 +134,11 @@ ordenar = (forma) => {
     });
   }
 };
+
+
+/***********************
+      EVENTOS
+ **********************/
 ordenar("mayor");
 console.log(listaProductos);
 
