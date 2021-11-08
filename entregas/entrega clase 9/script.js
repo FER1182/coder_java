@@ -20,7 +20,7 @@
 
 
 //creo un array de productos
-let listaProductos = [];
+
 let usuarios=[];
 
 /***********************
@@ -34,7 +34,7 @@ let usuarios=[];
 const crearUsuario = () => {
   
   let nombre = document.querySelector("#nombre").value;
-  let nombre = document.querySelector("#apellido").value;
+  let apellido = document.querySelector("#apellido").value;
   let dni = document.querySelector("#dni").value;
   let mail = document.querySelector("#mail").value;
   let pass = document.querySelector("#pass").value;
@@ -43,15 +43,24 @@ const crearUsuario = () => {
   
   let listaUsuarios;
 
-  if (localStorage.getItem("listaUsuarios") != null) {
-    listaUsuarios = JSON.parse(localStorage.getItem("listaUsuarios"));
+  if (localStorage.getItem("usuarios") != null) {
+    listaUsuarios = JSON.parse(localStorage.getItem("usuarios"));
     listaUsuarios.push(usuario);
-    localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
   }
-  listaUsuarios.push(usuario);
+  usuarios.push(usuario);
 
   return usuario;
   
+};
+//verificacion de storage
+
+const verificarSotarage = () => {
+  let dato = [];
+  if (localStorage.getItem("usuarios") != null) {
+    dato = JSON.parse(localStorage.getItem("usuarios"));
+    return dato;
+  }
 };
 
 
@@ -63,71 +72,45 @@ const agregarUsuario = (listaUsuarios) => {
 
 
 
+//guardar
 
-//pido al usuario la informacion para crear el producto (cada propiedad del producto)
-const crearProducto = () => {
-  let codigoProducto = prompt("ingrese el codigo del producto");
-  let tituloProducto = prompt("ingrese el titulo del producto");
-  let categoriaProducto = prompt("ingrese la categoria del producto");
-  
-  //hago una validacion para que no deje poner un precio menor a cero
-  let precioProducto=0;
-  do{
-  precioProducto = parseFloat(prompt("ingrese el precio del producto (tiene que ser mayor a cero)"));
-  }while(precioProducto<0);
-
-  let descripcionProducto = prompt("ingrese una descripcion del producto");
-  let stockProducto = 0;
-
-  //crea el producto nuevo apartir del Objetio Producto
-  let producto = new Producto(
-    codigoProducto,
-    tituloProducto,
-    categoriaProducto,
-    precioProducto,
-    descripcionProducto,
-    stockProducto
-  );
-
-  //agregar el nuevo producto al final del array
-  listaProductos.push(producto);
-};
-
-
-
-//ordena la informacion por codigo del producto 
-ordenar = (forma) => {
-  if (forma == "mayor") {
-    listaProductos.sort((a, b) => {
-      if (a.codigo > b.codigo) {
-        return -1;
-      }
-      if (a.codigo < b.codigo) {
-        return 1;
-      }
-      return 0;
-    });
+const guardar = () => {
+  crearUsuario();
+  if (verificarSotarage() != undefined) {
+    localStorage.setItem("usuarios", JSON.stringify(verificarSotarage()));
   } else {
-    listaProductos.sort((a, b) => {
-      if (a.codigo > b.codigo) {
-        return 1;
-      }
-      if (a.codigo < b.codigo) {
-        return -1;
-      }
-      return 0;
-    });
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
   }
 };
 
 
+//hacemos una tabla con los usuarios
+
+const imprimirDatos = () => {
+  let i=1;
+  verificarSotarage().forEach(obj => {
+    document.getElementById("tablaUsuario").innerHTML += `
+        <tr>
+          <th scope="row">${i++}</th>
+          <td>${obj.nombre}</td>
+          <td>${obj.apellido}</td>
+          <td>${obj.dni}</td>
+          <td>${obj.mail}</td>
+          <td>${obj.pass}</td>
+          
+        </tr>`
+        ;
+  });
+};
+
 /***********************
       EVENTOS
  **********************/
-ordenar("mayor");
 
+document.getElementById("btn").addEventListener("click", (/*e*/) => {
+  //e.preventDefault();
+  guardar();
+  
+});
 
-//busca los productos que cumplan la condicion  de que el precio sea menor a 1200
-
-let buscaPorPrecio = listaProductos.filter(obj => obj.precio < 1200);
-console.log(buscaPorPrecio);
+imprimirDatos();
