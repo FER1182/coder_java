@@ -8,7 +8,7 @@
       this.dni=dni;
       this.mail=mail;
       this.pass=pass;
-      this.listaNegra = true;
+
     }
   }
 
@@ -55,6 +55,10 @@ let usuarios=[];
       FUNCIONES
  **********************/
 
+//*****USUARIOS*******//
+
+//funcion para crear usuario
+
 const crearUsuario = () => {
   
   let nombre = document.querySelector("#nombre").value;
@@ -68,8 +72,8 @@ const crearUsuario = () => {
   let listaUsuarios;
 
   if (localStorage.getItem("listaUsuarios") != null) {
-    lista = JSON.parse(localStorage.getItem("listaUsuarios"));
-    lista.push(usuario);
+    listaUsuarios = JSON.parse(localStorage.getItem("listaUsuarios"));
+    listaUsuarios.push(usuario);
     localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
   }
   listaUsuarios.push(usuario);
@@ -77,6 +81,15 @@ const crearUsuario = () => {
   return usuario;
   
 };
+
+
+//agregar usuario
+const agregarUsuario = (listaUsuarios) => {
+  listaUsuarios.push(crearUsuario);
+  return listaUsuarios;
+};
+
+
 
 
 //pido al usuario la informacion para crear el producto (cada propiedad del producto)
@@ -109,7 +122,7 @@ const crearProducto = () => {
 };
 
 
-console.log(listaProductos);
+
 //ordena la informacion por codigo del producto 
 ordenar = (forma) => {
   if (forma == "mayor") {
@@ -140,7 +153,7 @@ ordenar = (forma) => {
       EVENTOS
  **********************/
 ordenar("mayor");
-console.log(listaProductos);
+
 
 //busca los productos que cumplan la condicion  de que el precio sea menor a 1200
 
