@@ -1,19 +1,10 @@
 /***********************
   ENTIDADES/ LAS CLASES
  **********************/
-  class Usuario {
-    constructor(nombre, apellido,dni, mail, pass) {
-      this.nombre=nombre;
-      this.apellido=apellido;
-      this.dni=dni;
-      this.mail=mail;
-      this.pass=pass;
+//**PRODUCTOS****/
 
-    }
-  }
-
-class Producto {
-  //crea el objeto del producto
+  class Producto {
+  //crea el objeto del producto para cuando tenga el formulario y pida al usuario la carga
   constructor(codigo, titulo, categoria, precio, descripcion, stock) {
     this.codigo = codigo;
     this.titulo = titulo;
@@ -45,19 +36,17 @@ class Producto {
 /***********************
       VARIABLES
  **********************/
-//creo un array de los usuarios
-let usuarios=[];
 
 //creo un array de productos
 const productos=[
-  {id:"1", nombre:"Camisa Square", detalle:"", categoria:"camisa", precio:100000, img:"./imagenes/pc1.jpg"},
-  {id:"2", nombre:"Camisa Grecias", detalle:"", categoria:"hogar", precio:60000, img:"./imagenes/aire1.jpg"},
-  {id:"3", nombre:"Camisa Sofi", detalle:"", categoria:"computacion", precio:120000, img:"./imagenes/notebook1.png"},
-  {id:"4", nombre:"Camisa Maria", detalle:"", categoria:"computacion", precio:80000, img:"./imagenes/all-in-one.jpg"},
-  {id:"5", nombre:"Camisa Sole", detalle:"", categoria:"computacion", precio:20000, img:"./imagenes/tablet.jpg"},
-  {id:"6", nombre:"Camisa Julia", detalle:"", categoria:"computacion", precio:1000, img:"./imagenes/mouse.jpg"},
-  {id:"7", nombre:"Camisa Rosa", detalle:"", categoria:"computacion", precio:2500, img:"./imagenes/teclado.jpg"},
-  {id:"8", nombre:"Camisa Beti", detalle:"", categoria:"hogar", precio:90000, img:"./imagenes/heladera1.jpg"},
+  {id:"1", nombre:"Camisa Square", detalle:"", categoria:"camisa", precio:1200, img:"./imagenes/22104.jpg"},
+  {id:"2", nombre:"Camisa Grecias", detalle:"", categoria:"remera", precio:1300, img:"./imagenes/26006.jpg"},
+  {id:"3", nombre:"Camisa Sofi", detalle:"", categoria:"camisa", precio:1000, img:"./imagenes/26008.jpg"},
+  {id:"4", nombre:"Camisa Maria", detalle:"", categoria:"remera", precio:1300, img:"./imagenes/26014.jpg"},
+  {id:"5", nombre:"Camisa Sole", detalle:"", categoria:"camisa", precio:1200, img:"./imagenes/26027.jpg"},
+  {id:"6", nombre:"Camisa Julia", detalle:"", categoria:"blusa", precio:1100, img:"./imagenes/27004.jpg"},
+  {id:"7", nombre:"Camisa Rosa", detalle:"", categoria:"camisa", precio:2000, img:"./imagenes/29001.jpg"},
+  {id:"8", nombre:"Camisa Beti", detalle:"", categoria:"blusa", precio:1900, img:"./imagenes/29007.jpg"},
  
 ];
 
@@ -72,98 +61,6 @@ let contenedorCarrito=document.querySelector("#contenedorCarrito");
       FUNCIONES
  **********************/
 
-//*****USUARIOS*******//
-
-//funcion para crear usuario
-
-const crearUsuario = () => {
-  
-  let nombre = document.querySelector("#nombre").value;
-  let apellido = document.querySelector("#apellido").value;
-  let dni = document.querySelector("#dni").value;
-  let mail = document.querySelector("#mail").value;
-  let pass = document.querySelector("#pass").value;
-
-  const usuario = new Usuario(nombre, apellido,dni, mail, pass);
-  
-  let listaUsuarios;
-
-  if (localStorage.getItem("listaUsuarios") != null) {
-    listaUsuarios = JSON.parse(localStorage.getItem("listaUsuarios"));
-    listaUsuarios.push(usuario);
-    localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
-  }
-  listaUsuarios.push(usuario);
-
-  return usuario;
-  
-};
-
-
-//agregar usuario
-const agregarUsuario = (listaUsuarios) => {
-  listaUsuarios.push(crearUsuario);
-  return listaUsuarios;
-};
-
-
-
-
-//pido al usuario la informacion para crear el producto (cada propiedad del producto)
-const crearProducto = () => {
-  let codigoProducto = prompt("ingrese el codigo del producto");
-  let tituloProducto = prompt("ingrese el titulo del producto");
-  let categoriaProducto = prompt("ingrese la categoria del producto");
-  
-  //hago una validacion para que no deje poner un precio menor a cero
-  let precioProducto=0;
-  do{
-  precioProducto = parseFloat(prompt("ingrese el precio del producto (tiene que ser mayor a cero)"));
-  }while(precioProducto<0);
-
-  let descripcionProducto = prompt("ingrese una descripcion del producto");
-  let stockProducto = 0;
-
-  //crea el producto nuevo apartir del Objetio Producto
-  let producto = new Producto(
-    codigoProducto,
-    tituloProducto,
-    categoriaProducto,
-    precioProducto,
-    descripcionProducto,
-    stockProducto
-  );
-
-  //agregar el nuevo producto al final del array
-  listaProductos.push(producto);
-};
-
-
-
-//ordena la informacion por codigo del producto 
-ordenar = (forma) => {
-  if (forma == "mayor") {
-    listaProductos.sort((a, b) => {
-      if (a.codigo > b.codigo) {
-        return -1;
-      }
-      if (a.codigo < b.codigo) {
-        return 1;
-      }
-      return 0;
-    });
-  } else {
-    listaProductos.sort((a, b) => {
-      if (a.codigo > b.codigo) {
-        return 1;
-      }
-      if (a.codigo < b.codigo) {
-        return -1;
-      }
-      return 0;
-    });
-  }
-};
 
 
 //****PRODUCTOS****//
@@ -257,8 +154,6 @@ function filtrar(array, dato){
 
 
 //****PRODUCTOS****/
-
-
 //evento que llama a los productos para armar las cards
 mostrarProd(productos);
 
