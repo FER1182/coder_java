@@ -106,10 +106,10 @@ const imprimirDatos = () => {
  **********************/
 //****USUARIOS****/
 
-document.getElementById("btn").addEventListener("click", (/*e*/) => {
-//e.preventDefault();
+document.getElementById("btn").addEventListener("click", (e) => {
+e.preventDefault();
 guardar();
-  
+
 });
 
 imprimirDatos();
