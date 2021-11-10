@@ -127,6 +127,7 @@ function capturar(id){
   sumarProductos();
 }
 
+//funcion para sacar productos del carrito
 function quitar(id){
   let carrito=JSON.parse(localStorage.getItem("carrito"));
   let carritoFinal=carrito.filter(e=> e.id != id);
@@ -135,6 +136,8 @@ function quitar(id){
   sumarProductos();
 }
 
+
+//genera el monto a pagar del carrito
 function sumarProductos(){    
   let suma = 0;
   let productosCarrito=JSON.parse(localStorage.getItem("carrito"))
@@ -144,9 +147,6 @@ function sumarProductos(){
   let total=document.querySelector("#totalCarrito").textContent=suma;    
 }
 
-function filtrar(array, dato){
-  return array.filter(e=> e.categoria == dato);
-}
 
 /***********************
       EVENTOS
@@ -157,11 +157,10 @@ function filtrar(array, dato){
 //evento que llama a los productos para armar las cards
 mostrarProd(productos);
 
+
+// llama la funcion para mostrar el carrito y el monto de compra
 if(localStorage.getItem("carrito")){
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos(JSON.parse(localStorage.getItem("carrito")));
 }
 
-document.querySelector("#filtrar").addEventListener("change",(e)=>{    
-  e.target.value !=" " ?  mostrarProd(filtrar(productos, e.target.value)) : mostrarProd(productos);
-});
