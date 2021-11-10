@@ -13,7 +13,54 @@
    />
     <title>QUE ME VAYA BIEN</title>
 </head>
-<body>
+<body class="container">
+  <header>
+      <nav class="navbar navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand">Navbar</a>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+  </header>
+
+  <main>        
+      <div class="container my-2 col-8">
+          <select class="form-select" aria-label="Default select example" id="filtrar">
+              <option selected>Filtra por categoria</option>
+              <option value=" ">Todos</option>
+              <option value="hogar">Hogar</option>        
+              <option value="computacion">Informatica</option>
+          </select>
+      </div>
+
+      <div class="container d-flex my-5">
+          <div class="container d-flex flex-wrap justify-content-around col-8" id="contenedorProductos">
+
+          </div>
+          <div class="container col-4">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                  </tr>
+                  </thead>
+                  <tbody class="col-4" id="contenedorCarrito">                  
+                  
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+  </main>
+  <footer>
+
+  </footer>
     
 
 

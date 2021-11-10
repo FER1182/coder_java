@@ -45,11 +45,28 @@ class Producto {
 /***********************
       VARIABLES
  **********************/
-
+//creo un array de los usuarios
+let usuarios=[];
 
 //creo un array de productos
-let listaProductos = [];
-let usuarios=[];
+const productos=[
+  {id:"1", nombre:"Camisa Square", detalle:"", categoria:"camisa", precio:100000, img:"./imagenes/pc1.jpg"},
+  {id:"2", nombre:"Camisa Grecias", detalle:"", categoria:"hogar", precio:60000, img:"./imagenes/aire1.jpg"},
+  {id:"3", nombre:"Camisa Sofi", detalle:"", categoria:"computacion", precio:120000, img:"./imagenes/notebook1.png"},
+  {id:"4", nombre:"Camisa Maria", detalle:"", categoria:"computacion", precio:80000, img:"./imagenes/all-in-one.jpg"},
+  {id:"5", nombre:"Camisa Sole", detalle:"", categoria:"computacion", precio:20000, img:"./imagenes/tablet.jpg"},
+  {id:"6", nombre:"Camisa Julia", detalle:"", categoria:"computacion", precio:1000, img:"./imagenes/mouse.jpg"},
+  {id:"7", nombre:"Camisa Rosa", detalle:"", categoria:"computacion", precio:2500, img:"./imagenes/teclado.jpg"},
+  {id:"8", nombre:"Camisa Beti", detalle:"", categoria:"hogar", precio:90000, img:"./imagenes/heladera1.jpg"},
+ 
+];
+
+let contenedorProd=document.querySelector("#contenedorProductos");
+//creo la variable para guardar carrito
+let contenedorCarrito=document.querySelector("#contenedorCarrito");
+
+
+
 
 /***********************
       FUNCIONES
@@ -62,7 +79,7 @@ let usuarios=[];
 const crearUsuario = () => {
   
   let nombre = document.querySelector("#nombre").value;
-  let nombre = document.querySelector("#apellido").value;
+  let apellido = document.querySelector("#apellido").value;
   let dni = document.querySelector("#dni").value;
   let mail = document.querySelector("#mail").value;
   let pass = document.querySelector("#pass").value;
@@ -149,13 +166,107 @@ ordenar = (forma) => {
 };
 
 
+//****PRODUCTOS****//
+//funcion para mostrar los productos en cards
+
+function mostrarProd(array){
+  contenedorProd.innerHTML="";
+  for(e of array){
+      contenedorProd.innerHTML+=`
+      <div class="card col-2" style="width: 9rem;">
+          <img src="${e.img}" class="card-img-top" alt="...">
+          <div class="card-body">
+              <h5 class="card-title">${e.nombre}</h5>
+              <p class="card-text">${e.detalle}</p>
+              <h5 class="card-title">${e.precio}</h5>
+              <button class="btn btn-primary" onclick="capturar(${e.id})">Agregar</button>
+          </div>
+      </div>
+      `
+  }
+}
+
+// funcion que muestra como los productos que se agregan al carrito
+
+function mostrarCarrito(array){
+  let i=1;
+  contenedorCarrito.innerHTML="";
+  for(e of array){
+      contenedorCarrito.innerHTML+=`
+          <tr>
+              <th scope="row">${i++}</th>
+              <td>${e.nombre}</td>
+              <td>${e.detalle}</td>
+              <td>${e.precio}</td>
+              <td><button class="btn btn-danger" onclick="quitar(${e.id})">X</button></td>
+          </tr>`        
+  }
+  contenedorCarrito.innerHTML+=`
+          <tr>
+              <td class="text-center" colspan="3" >Total</td>
+              <td colspan="2">$<span id="totalCarrito">0</span></td>
+          </tr>
+  `
+
+}
+
+//funcion que agrega un producto productos del carrito al storage
+function agregarStorage(producto){
+  let storage= localStorage.getItem("carrito") ? JSON.parse(localStorage.getItem("carrito")) : [];
+  storage.push(producto);
+  return storage;
+}
+
+//funcion que guarda el carrito en el storage
+function guardarStorage(array){
+  localStorage.setItem("carrito", JSON.stringify(array));
+}
+
+//funcion que muestra el carrito
+function capturar(id){
+  let productoSleccionado=productos.find(e=> e.id == id);
+  guardarStorage(agregarStorage(productoSleccionado));
+  mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
+  sumarProductos();
+}
+
+function quitar(id){
+  let carrito=JSON.parse(localStorage.getItem("carrito"));
+  let carritoFinal=carrito.filter(e=> e.id != id);
+  guardarStorage(carritoFinal);
+  mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
+  sumarProductos();
+}
+
+function sumarProductos(){    
+  let suma = 0;
+  let productosCarrito=JSON.parse(localStorage.getItem("carrito"))
+  for( e of productosCarrito){          
+      suma += e.precio        
+  }    
+  let total=document.querySelector("#totalCarrito").textContent=suma;    
+}
+
+function filtrar(array, dato){
+  return array.filter(e=> e.categoria == dato);
+}
+
 /***********************
       EVENTOS
  **********************/
-ordenar("mayor");
 
 
-//busca los productos que cumplan la condicion  de que el precio sea menor a 1200
+//****PRODUCTOS****/
 
-let buscaPorPrecio = listaProductos.filter(obj => obj.precio < 1200);
-console.log(buscaPorPrecio);
+
+//evento que llama a los productos para armar las cards
+mostrarProd(productos);
+
+if(localStorage.getItem("carrito")){
+  mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
+  sumarProductos(JSON.parse(localStorage.getItem("carrito")));
+}
+
+document.querySelector("#filtrar").addEventListener("change",(e)=>{    
+  e.target.value !=" " ?  mostrarProd(filtrar(productos, e.target.value)) : mostrarProd(productos);
+});
