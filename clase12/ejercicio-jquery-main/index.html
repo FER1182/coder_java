@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio JQuery</title>
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+</head>
+
+<body>
+  <div class="products">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="contact-form">
+            <form id="formulario">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input id="title" name="title" type="text" placeholder="Título" autocomplete="off">
+                </fieldset>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input id="price" name="price" type="text" placeholder="Precio" autocomplete="off">
+                </fieldset>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input id="stars" name="stars" type="number" placeholder="N. Estrellas" autocomplete="off">
+                </fieldset>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input id="reviews" name="reviews" type="number" placeholder="Reviews" autocomplete="off">
+                </fieldset>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <fieldset>
+                  <input id="img" name="img" type="text" placeholder="URL de la imagen" autocomplete="off">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" name="submit" id="form-submit" class="filled-button">Enviar</button>
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+        <div class="col-lg-8">
+          <div class="filters-content">
+            <div class="row grid" id="productos">
+
+              <!-- PRODUCTO DE EJEMPLO -->
+              <div class="col-lg-6 col-md-6 all des">
+                <div class="product-item">
+                  <a href="#"><img src="assets/images/01.jpg" alt=""></a>
+                  <div class="down-content">
+                    <a href="#">
+                      <h4>Tittle goes here</h4>
+                    </a>
+                    <h6>$18.25</h6>
+                    <ul class="stars">
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      
+                      
+                    </ul>
+                    <span>Reviews (12)</span>
+                  </div>
+                </div>
+              </div>
+                <!-- FIN PRODUCTO EJEMPLO -->
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="assets/js/ejercicio.js"></script>
+</body>
+
+</html>
