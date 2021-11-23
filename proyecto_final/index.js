@@ -146,13 +146,13 @@ function mostrarProd(array) {
 
   for (e of array) {
     contenedorProd.innerHTML += `
-      <div class="card col-2" id="prod${e.id}" style="width: 18rem;">
-          <img src="${e.img}" class="card-img-top" alt="...">
+      <div class="card col-2" id="prod${e.id}">
+          <img src="${e.img}" class="card-img-top" alt="${e.nombre}">
           <div class="card-body">
               <h5 class="card-title">${e.nombre}</h5>
               <p class="card-text" id="codigo">${e.codigo}</p>
               <h5 class="card-title">$ ${e.precio}</h5>
-              <button class="btn btn-primary" onclick="capturar(${e.id})">Agregar</button>
+              <button class="btn btn-primary" id="agrega" onclick="capturar(${e.id})">Agregar</button>
           </div>
       </div>
       `;
@@ -170,7 +170,7 @@ function mostrarCarrito(array) {
               <td>${e.codigo}</td>
               <td><input type="number" id="cantCarrito" min="1" max="99" value="${e.cantidad}" style="width: 3rem;"></td>
               <td>$${e.precio}</td>
-              <td id="subtotal"></td> 
+             
               <td><button class="btn btn-danger" onclick="quitar(${e.idCarro})">X</button></td>
           </tr>`;
   }
@@ -221,10 +221,9 @@ function capturar(id) {
 function quitar(id) {
   let carrito = JSON.parse(localStorage.getItem("carrito"));
   let carritoFinal = carrito.filter((e) => e.idCarro != id);
-  console.log(carritoFinal);
+  
   
   renombrarId(carritoFinal);
-  console.log(carritoFinal);
   guardarStorage(carritoFinal);
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos();
@@ -232,26 +231,16 @@ function quitar(id) {
 
 //funcion que reenumera los id de cada producto en el carrito
 function renombrarId(listaCarrito) {
-  
-
- 
   lastItem = listaCarrito.length;
   for (let i = 0; i < listaCarrito.length; i++) {
     listaCarrito[i].idCarro = i+1;
-    console.log (listaCarrito[i].idCarro);
+   
   }
-  console.log(listaCarrito);
   return listaCarrito;
 }
 
-//funcion calcula subtotal de cada producto con jquery
 
-$(() => {
-  $("#cantCarrito").on("change", function () {
-    let cantItem = $(this).val();
-    //console.log(cantItem);
-  });
-});
+
 
 //genera el monto a pagar del carrito
 function sumarProductos() {
@@ -262,6 +251,39 @@ function sumarProductos() {
   }
   let total = (document.querySelector("#totalCarrito").textContent = suma);
 }
+
+
+//jquery
+
+$(() => {
+  // inserta graficamente la prenda en el carrito
+
+  $("#agrega").on("click", function () {
+    $(".card").animate(
+      {
+        left: "800px",
+        opacity: "0",
+      },
+      "50000",
+      function () {
+        $(".card").animate({
+          left: "0px",
+          opacity: "1",
+        });
+        $("h1").text("AGREGA PRODUCTOS AL CARRITO");
+      }
+    );
+    $("h1").text("agregaste el producto");
+  });
+
+});
+
+
+
+
+
+
+
 
 /***********************
       EVENTOS
