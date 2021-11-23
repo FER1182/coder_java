@@ -1,0 +1,26 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+#codigo{
+    color:red;
+    font-size: 20px;
+}
+
+.table-wrapper {
+    max-height: 100px;
+    overflow: auto;
+    display:inline-block;
+  }
+
+#tabla-fija {
+    position: fixed;
+    min-height: 120px;
+    width: 252px;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: lightblue;
+  
+    
+}

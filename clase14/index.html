@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clase 14 ajax</title>
+</head>
+<body>
+    
+    <form id="formulario" action="request.php" method="post">
+     <input type="text" id="nombre">
+     <input type="mail" id="mail">
+     <textarea name="" id="mensaje" ></textarea>   
+        <div>
+            <button id="send" type="submit">enviar</button>
+            <div id="status"></div>
+        </div>
+    </form>
+
+    <button id="ejemploGet">ejemplo get</button>
+    <div id="getData"></div>
+    
+    <button id="ejemploPost">ejemplo post</button>
+
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
