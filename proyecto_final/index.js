@@ -128,6 +128,15 @@ const productos = [
     precio: 1900,
     img: "./imagenes/29007.jpg",
   },
+  {
+    id: "9",
+    codigo: "29013",
+    nombre: "Camisa Claudia",
+    detalle: "",
+    categoria: "blusa",
+    precio: 1750,
+    img: "./imagenes/29013.jpg",
+  },
 ];
 
 let contenedorProd = document.querySelector("#contenedorProductos");
@@ -152,7 +161,7 @@ function mostrarProd(array) {
               <h5 class="card-title">${e.nombre}</h5>
               <p class="card-text" id="codigo">${e.codigo}</p>
               <h5 class="card-title">$ ${e.precio}</h5>
-              <button class="btn btn-primary" id="agrega" onclick="capturar(${e.id})">Agregar</button>
+              <button class="btn btn-primary agrega" onclick="capturar(${e.id})">Agregar</button>
           </div>
       </div>
       `;
@@ -168,17 +177,23 @@ function mostrarCarrito(array) {
           <tr class="item">
               <th scope="row">${e.idCarro}</th>
               <td>${e.codigo}</td>
-              <td><input type="number" id="cantCarrito" min="1" max="99" value="${e.cantidad}" style="width: 3rem;"></td>
+              <td>${e.cantidad}</td>
               <td>$${e.precio}</td>
              
-              <td><button class="btn btn-danger" onclick="quitar(${e.idCarro})">X</button></td>
+              <td><button class="btn btn-danger " onclick="quitar(${e.idCarro})">X</button></td>
           </tr>`;
   }
   contenedorCarrito.innerHTML += `
           <tr>
               <td class="text-center" colspan="3" >Total</td>
               <td colspan="2">$<span id="totalCarrito">0</span></td>
+              
+              
           </tr>
+          <tr>
+          <td class="text-center" colspan="4" ><button class="btn btn-primary agrega" onclick="capturar(${e.id})">Terminar Compra</button></td>
+          
+      </tr>
   `;
 }
 
@@ -222,11 +237,16 @@ function quitar(id) {
   let carrito = JSON.parse(localStorage.getItem("carrito"));
   let carritoFinal = carrito.filter((e) => e.idCarro != id);
   
-  
   renombrarId(carritoFinal);
   guardarStorage(carritoFinal);
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos();
+
+  
+
+
+
+
 }
 
 //funcion que reenumera los id de cada producto en el carrito
@@ -258,28 +278,27 @@ function sumarProductos() {
 $(() => {
   // inserta graficamente la prenda en el carrito
 
-  $("#agrega").on("click", function () {
-    $(".card").animate(
+  $(".agrega").on("click", function () {
+    
+   $(this).parent().parent().animate(
       {
         left: "800px",
         opacity: "0",
       },
-      "50000",
+      "1000",
       function () {
         $(".card").animate({
           left: "0px",
           opacity: "1",
         });
-        $("h1").text("AGREGA PRODUCTOS AL CARRITO");
+        $("h1").text("");
       }
     );
-    $("h1").text("agregaste el producto");
+    
+   
   });
 
 });
-
-
-
 
 
 
