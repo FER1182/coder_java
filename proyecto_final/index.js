@@ -292,16 +292,19 @@ $(() => {
           opacity: "1",
         });
         $("h1").text("");
-      }
-    );
+      });
+      $("h1").text("producto agregado");
+    
     
    
   });
 
 });
 
-
-
+//funcion para filtrar los productos
+function filtrar(array, dato){
+  return array.filter(e=> e.categoria == dato);
+}
 
 
 /***********************
@@ -317,3 +320,8 @@ if (localStorage.getItem("carrito")) {
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos(JSON.parse(localStorage.getItem("carrito")));
 }
+
+//llama la funcion filtrar cuando cambia la categoria seleccionada
+document.querySelector("#filtrar").addEventListener("change",(e)=>{    
+  e.target.value !="" ?  mostrarProd(filtrar(productos, e.target.value)) : mostrarProd(productos);
+});

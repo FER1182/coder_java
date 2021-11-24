@@ -29,5 +29,12 @@
     word-wrap: break-word;
     background-color: lightblue;
   
-    
+}
+ .producto-agregado{
+    text-align: center;
+    font-size: 20px;
+    position: fixed;
+    left: 900px;
+    top: 50px;
+    z-index: 3;
 }
