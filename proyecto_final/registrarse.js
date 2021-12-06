@@ -83,7 +83,7 @@ const guardar = () => {
 
 //hacemos una tabla con los usuarios get
 $(() => {
-  const URL ="usuarios.json";
+  const URL ="./usuarios.json";
 /* 
   const request = new XMLHttpRequest();
   request.open('GET', URL);
@@ -117,7 +117,7 @@ $(() => {
  */
   //agrega usuarios Post
 
-  let datosPost={
+/*   let datosPost={
     "nombre": "jorge",
     "apellido": "Palacios",
     "dni": "2930112021",
@@ -129,10 +129,25 @@ $("#btnPost").on("click",function(){
         alert(`el estado es ${status}`);
         console.log(`el nomreb es  ${data.nombre}`);
     })
-})
+}) */
 
 
-});
+$.post( URL, { "parametro1" : "valor1", "parametro2" : "valor2" }, null, "json" )
+    .done(function( data, textStatus, jqXHR ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud se ha completado correctamente." );
+        }
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        if ( console && console.log ) {
+            console.log( "La solicitud a fallado: " +  textStatus);
+        }
+
+
+      })
+
+   
+  });
 /***********************
       EVENTOS
  **********************/
