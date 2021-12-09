@@ -293,7 +293,7 @@ $(() => {
         });
         $("h1").text("");
       });
-      $("h1").text("producto agregado");
+      $("h1").text("PRODUCTO AGREGADO");
     
     
    

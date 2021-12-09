@@ -1,4 +1,4 @@
-const btnData = document.getElementById("btnData");
+/* const btnData = document.getElementById("btnData");
 const containerData = document.getElementById("containerData");
 
 //fetch archivo de text
@@ -15,7 +15,7 @@ const containerData = document.getElementById("containerData");
     .catch((error)=>console.log(error));
 };
  */
-
+/* 
 //fetch archivo json
 const obtenerDatos = () => {
     fetch("usuarios.json")
@@ -33,4 +33,22 @@ const obtenerDatos = () => {
 btnData.onclick = () => {
   obtenerDatos();
   //containerData.innerHTML="<p>Mis Datos </p>"
-};
+}; */
+
+let url = 'usuarios.json'
+let req = new XMLHttpRequest();
+
+
+console.log(req);
+
+req.open('POST',url,true)
+req.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+req.onreadystatechange = ()=>{
+  if(req.readyState === 4 && req.status === 201){
+    let object = JSON.parse(req.response)
+    console.log(object)
+  }
+}
+
+let body= JSON.stringify({nombre: 'fer', apellido:'caundooso'})
+req.send(body)

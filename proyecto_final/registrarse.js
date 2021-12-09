@@ -84,7 +84,8 @@ const guardar = () => {
 //hacemos una tabla con los usuarios get
 $(() => {
   const URL ="./usuarios.json";
-/* 
+  const URLPOST= "https://jsonplaceholder.typicode.com/posts"
+ 
   const request = new XMLHttpRequest();
   request.open('GET', URL);
 
@@ -114,10 +115,30 @@ $(() => {
           }
       })
   }
- */
+
+/* 
+//Declaramos la url que vamos a usar para el GET
+const URLGET   = "https://jsonplaceholder.typicode.com/posts"
+//Declaramos la información a enviar
+const infoPost =  { nombre: "Ana", profesion: "Programadora" }
+//Agregamos un botón con jQuery
+$("body").prepend('<button id="btn1">POST</button>');
+//Escuchamos el evento click del botón agregado
+$("#btn1").click(() => { 
+    $.post(URLGET, infoPost ,(respuesta, estado) => {
+        if(estado === "success"){
+            $("body").prepend(`<div>
+Guardado:${respuesta.nombre}
+</div>`);
+        }  
+    });
+});
+
+}); */
+
   //agrega usuarios Post
 
-/*   let datosPost={
+  let datosPost={
     "nombre": "jorge",
     "apellido": "Palacios",
     "dni": "2930112021",
@@ -125,29 +146,13 @@ $(() => {
     "pass": "123465678"
 }
 $("#btnPost").on("click",function(){
-    $.post(URL,datosPost,function(data,status){
+    $.post(URLPOST,datosPost,function(data,status){
         alert(`el estado es ${status}`);
         console.log(`el nomreb es  ${data.nombre}`);
     })
-}) */
+}) 
 
-
-$.post( URL, { "parametro1" : "valor1", "parametro2" : "valor2" }, null, "json" )
-    .done(function( data, textStatus, jqXHR ) {
-        if ( console && console.log ) {
-            console.log( "La solicitud se ha completado correctamente." );
-        }
-    })
-    .fail(function( jqXHR, textStatus, errorThrown ) {
-        if ( console && console.log ) {
-            console.log( "La solicitud a fallado: " +  textStatus);
-        }
-
-
-      })
-
-   
-  });
+});
 /***********************
       EVENTOS
  **********************/
