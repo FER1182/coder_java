@@ -50,6 +50,19 @@ class ProductoCarro {
     this.precio = precio;
   }
 }
+class Pedido {
+  // creo la clase que va a manejar todos los datos del carrito
+  constructor(fecha,idPedido, carritoPedido, cliente,vendedora) {
+    this.fecha= fecha;
+    this.idPedido = idPedido;
+    this.carritoPedido = carritoPedido;
+    this.cliente = cliente;
+    this.vendedora=vendedora;
+  }
+}
+
+
+
 /***********************
       VARIABLES
  **********************/
@@ -138,10 +151,15 @@ const productos = [
     img: "./imagenes/29013.jpg",
   },
 ];
+let contenedorCategoria = document.querySelector("#contenedorCategoria");
+let contenedorTabla = document.querySelector("#containerTable");
+
 
 let contenedorProd = document.querySelector("#contenedorProductos");
 //creo la variable para guardar carrito
 let contenedorCarrito = document.querySelector("#contenedorCarrito");
+
+let fechaHoy = new Date;
 
 /***********************
       FUNCIONES
@@ -191,7 +209,7 @@ function mostrarCarrito(array) {
               
           </tr>
           <tr>
-          <td class="text-center" colspan="4" ><button class="btn btn-primary agrega" onclick="capturar(${e.id})">Terminar Compra</button></td>
+          <td class="text-center" colspan="4" ><button class="btn btn-primary agrega" onclick="terminarCompra()">Terminar Compra</button></td>
           
       </tr>
   `;
@@ -220,14 +238,15 @@ function agregarStorage(producto) {
 }
 
 //funcion que guarda el carrito en el storage
-function guardarStorage(array) {
-  localStorage.setItem("carrito", JSON.stringify(array));
+function guardarStorage(nombreArray,array) {
+  localStorage.setItem(nombreArray, JSON.stringify(array));
 }
 
 //funcion que muestra el carrito
 function capturar(id) {
   let productoSeleccionado = productos.find((e) => e.id == id);
-  guardarStorage(agregarStorage(productoSeleccionado));
+  let nombreArray = "carrito"
+  guardarStorage(nombreArray,agregarStorage(productoSeleccionado));
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos();
 }
@@ -241,12 +260,6 @@ function quitar(id) {
   guardarStorage(carritoFinal);
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos();
-
-  
-
-
-
-
 }
 
 //funcion que reenumera los id de cada producto en el carrito
@@ -258,10 +271,6 @@ function renombrarId(listaCarrito) {
   }
   return listaCarrito;
 }
-
-
-
-
 //genera el monto a pagar del carrito
 function sumarProductos() {
   let suma = 0;
@@ -304,6 +313,54 @@ $(() => {
 //funcion para filtrar los productos
 function filtrar(array, dato){
   return array.filter(e=> e.categoria == dato);
+}
+
+//funcion que finaliza el pedido
+function terminarCompra() {
+  contenedorProd.innerHTML = "<p>GRACIAS POR FINALIZAR TU COMPRA CUANDO TERMINEMOS DE ARMAR TU PEDIDO TE CONTACTAREMOS</p>";
+  contenedorTabla.innerHTML ="";
+  contenedorCategoria.innerHTML = "";
+  
+  let carritoFinalizado = JSON.parse(localStorage.getItem("carrito"));
+  let nombreArray = "pedido"
+  
+  guardarStorage(nombreArray,agregarStoragePedido(carritoFinalizado));
+  vaciarCarrito();
+  
+}
+
+
+//funcion para vaciar el carrito cuando termina la compra
+function vaciarCarrito() {
+let carritoVacio=[];
+let nombreArray = "carrito"
+guardarStorage(nombreArray,carritoVacio);
+}
+
+//funcion que agrega un pedido terminado al storage
+function agregarStoragePedido(pedidoTerminado) {
+  let lastItem = 0;
+
+  let storage = localStorage.getItem("pedido")
+    ? JSON.parse(localStorage.getItem("pedido"))
+    : [];
+
+  lastItem = storage.length;
+  idPedido = lastItem + 1;
+  let nombre = "juan";
+  let fecha = `${fechaHoy.getDate()}/${fechaHoy.getMonth()+1}/${fechaHoy.getFullYear()} `;
+  
+  let vendedora = "mari"
+  listaPedido = new Pedido(
+    fecha,
+    idPedido,
+    pedidoTerminado,
+    nombre,
+    vendedora
+  );
+  
+  storage.push(listaPedido);
+  return storage;
 }
 
 

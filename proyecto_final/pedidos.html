@@ -28,49 +28,25 @@
     </header>
 
     <main>
-      <div class="container my-2 col-8" id="contenedorCategoria">
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          id="filtrar"
-        >
-          <option selected value="">todos</option>
-          <option value="remera">remera</option>
-          <option value="camisa">camisa</option>
-          <option value="blusa">blusa</option>
-        </select>
-      </div>
-      <div class="producto-agregado">
-       <h1></h1>
-      </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"># Pedido</th>
+                <th scope="col">fecha</th>
+                <th scope="col">cliente</th>
+                <th scope="col">vendedora</th>
+                <th scope="col">Armar</th>
+                <th scope="col">Eliminar pedido</th>
+              
+              </tr>
+            </thead>
+            <tbody id="tablaPedidos"> 
+           
+            </tbody>
+          </table>
     
-      <div class="container d-flex my-5">
-        <div
-          class="container d-flex flex-wrap justify-content-around col-8"
-          id="contenedorProductos"
-        >
-          
-        </div>
-        <div class="container col-4" id="containerTable">
-          
-            <table id="tabla-fija" class="table table-wrapper">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Articulo</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">Precio</th>
-                  
-                  <th scope="col">Quitar</th>
-                </tr>
-              </thead>
-              <tbody class="col-4" id="contenedorCarrito"></tbody>
-            </table>
-            
-          
-        </div>
-      </div>
       
+    
     </main>
     <footer></footer>
 
@@ -87,6 +63,6 @@
     ></script>
 
     <script src="./jquery-3.6.0.min.js"></script>
-    <script src="./index.js"></script>
-  </body>
+    <script src="./pedidos.js"></script>
+</body>
 </html>
