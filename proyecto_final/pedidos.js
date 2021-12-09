@@ -4,7 +4,7 @@
 
 
 let contenedorPedidos =document.querySelector("#tablaPedidos");
-
+let contenedorCarrito =document.querySelector("#modalBody");
 
 /***********************
       FUNCIONES
@@ -25,6 +25,33 @@ function mostrarPedido(array) {
             </tr>`;
     }
 }
+
+function armarPedido(idPedido) {
+    contenedorCarrito.innerHTML = "";
+    for (e of array) {
+      contenedorCarrito.innerHTML += `
+            <tr class="item">
+                <th scope="row">${e.idCarro}</th>
+                <td>${e.codigo}</td>
+                <td>${e.cantidad}</td>
+                <td>$${e.precio}</td>
+               
+                <td><button class="btn btn-danger " onclick="quitar(${e.idCarro})">X</button></td>
+            </tr>`;
+    }
+    contenedorCarrito.innerHTML += `
+            <tr>
+                <td class="text-center" colspan="3" >Total</td>
+                <td colspan="2">$<span id="totalCarrito">0</span></td>
+                
+                
+            </tr>
+            <tr>
+            <td class="text-center" colspan="4" ><button class="btn btn-primary agrega" onclick="terminarCompra()">Terminar Compra</button></td>
+            
+        </tr>
+    `;
+  }
 
 /***********************
       EVENTOS
