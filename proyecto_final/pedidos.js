@@ -76,9 +76,9 @@ function armarPedido(idPedido) {
         for (var j = 5, col; col = row.cells[j]; j++) {
             //console.log(cell[5].value);
           console.log(`Txt: ${col.innerText} \tFila: ${i} \t Celda: ${j}`);
-        //}
+        
     
-     // }
+     }
     
     
     
