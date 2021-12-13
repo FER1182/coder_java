@@ -6,6 +6,8 @@
 let contenedorPedidos =document.querySelector("#tablaPedidos");
 let contenedorCarrito =document.querySelector("#tablaCarro");
 let contenedorFooterCarrito =document.querySelector("#footerCarrito");
+let radioSi =document.querySelector("#si");
+let radioNo =document.querySelector("#no");
 
 
 /***********************
@@ -49,8 +51,8 @@ function armarPedido(idPedido) {
                 <td>${e.codigo}</td>
                 <td>${e.cantidad}</td>
                 <td>$${e.precio}</td>
-                <td> <input type="radio" id="si" name=${e.idCarro} value="si" unchecked> <label for="si">si</label></td>
-                <td> <input type="radio" id="no" name=${e.idCarro} value="no" unchecked> <label for="no">no</label></td>
+                <td> <input type="radio" id="${e.idCarro}" name=${e.idCarro} value="si" checked> <label for="si">si</label></td>
+                <td> <input type="radio" id="${e.idCarro}" name=${e.idCarro} value="no" unchecked> <label for="no">no</label></td>
                 
             </tr>`;
     }
@@ -68,15 +70,21 @@ function armarPedido(idPedido) {
     `;
 
     $("#pedidoPreparado").click(function(){
-        console.log($(this));
-      
+        
 
-      for (var i = 0, row; row = contenedorCarrito.rows[i]; i++) {
+      for (var i = 0; i<contenedorCarrito.rows.length-1; i++) {
+        
+        console.log(document.getElementById(i+1).checked);
         //alert(cell[i].innerText);
-        for (var j = 5, col; col = row.cells[j]; j++) {
+       // for (var j = 5, col; col = row.cells[j]; j++) {
             //console.log(cell[5].value);
-          console.log(`Txt: ${col.innerText} \tFila: ${i} \t Celda: ${j}`);
-        }
+          //console.log(`Txt: ${col.innerText} \tFila: ${i} \t Celda: ${j}`);
+      //    if(document.querySelector(`#si${i}`).checked==true) {
+        //    console.log("si");
+       // }else if(document.querySelector(`#no${i}`).checked==true) {
+         //   console.log("no");
+       // }
+        
     
      }
     
