@@ -43,11 +43,12 @@ class Producto {
 }
 class ProductoCarro {
   // creo la clase que va a manejar todos los datos del carrito
-  constructor(idCarro, codigo, cantidad, precio) {
+  constructor(idCarro, codigo, cantidad, precio,img) {
     this.idCarro = idCarro;
     this.codigo = codigo;
     this.cantidad = cantidad;
     this.precio = precio;
+    this.img = img;
   }
 }
 class Pedido {
@@ -160,7 +161,10 @@ let contenedorProd = document.querySelector("#contenedorProductos");
 let contenedorCarrito = document.querySelector("#contenedorCarrito");
 
 let fechaHoy = new Date;
+let cliente = document.querySelector("#fname").value;
+console.log(cliente);
 
+//let vendedora= document.querySelector("#contenedorCarrito");
 /***********************
       FUNCIONES
  **********************/
@@ -205,14 +209,14 @@ function mostrarCarrito(array) {
           <tr>
               <td class="text-center" colspan="3" >Total</td>
               <td colspan="2">$<span id="totalCarrito">0</span></td>
-              
-              
           </tr>
+          
           <tr>
           <td class="text-center" colspan="4" ><button class="btn btn-primary agrega" onclick="terminarCompra()">Terminar Compra</button></td>
           
       </tr>
   `;
+  
 }
 
 //funcion que agrega un producto- productos del carrito al storage
@@ -230,7 +234,8 @@ function agregarStorage(producto) {
     idCarrito,
     producto.codigo,
     1,
-    producto.precio
+    producto.precio,
+    producto.img,
   );
 
   storage.push(listaCarrito);
@@ -246,6 +251,7 @@ function guardarStorage(nombreArray,array) {
 function capturar(id) {
   let productoSeleccionado = productos.find((e) => e.id == id);
   let nombreArray = "carrito"
+  
   guardarStorage(nombreArray,agregarStorage(productoSeleccionado));
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos();
@@ -347,15 +353,15 @@ function agregarStoragePedido(pedidoTerminado) {
 
   lastItem = storage.length;
   idPedido = lastItem + 1;
-  let nombre = "juan";
-  let fecha = `${fechaHoy.getDate()}/${fechaHoy.getMonth()+1}/${fechaHoy.getFullYear()} `;
   
+  let fecha = `${fechaHoy.getDate()}/${fechaHoy.getMonth()+1}/${fechaHoy.getFullYear()} `;
+  console.log(cliente);
   let vendedora = "mari"
   listaPedido = new Pedido(
     fecha,
     idPedido,
     pedidoTerminado,
-    nombre,
+    cliente,
     vendedora
   );
   
