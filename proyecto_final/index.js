@@ -159,7 +159,7 @@ let contenedorTabla = document.querySelector("#containerTable");
 let contenedorProd = document.querySelector("#contenedorProductos");
 //creo la variable para guardar carrito
 let contenedorCarrito = document.querySelector("#contenedorCarrito");
-
+let contenedorCliente = document.querySelector("#divCliente");
 let fechaHoy = new Date;
 let cliente = document.querySelector("#fname").value;
 console.log(cliente);
@@ -251,7 +251,6 @@ function guardarStorage(nombreArray,array) {
 function capturar(id) {
   let productoSeleccionado = productos.find((e) => e.id == id);
   let nombreArray = "carrito"
-  
   guardarStorage(nombreArray,agregarStorage(productoSeleccionado));
   mostrarCarrito(JSON.parse(localStorage.getItem("carrito")));
   sumarProductos();
@@ -326,11 +325,15 @@ function terminarCompra() {
   contenedorProd.innerHTML = "<p>GRACIAS POR FINALIZAR TU COMPRA CUANDO TERMINEMOS DE ARMAR TU PEDIDO TE CONTACTAREMOS</p>";
   contenedorTabla.innerHTML ="";
   contenedorCategoria.innerHTML = "";
+  contenedorCliente.innerHTML = "";
   
   let carritoFinalizado = JSON.parse(localStorage.getItem("carrito"));
   let nombreArray = "pedido"
   
-  guardarStorage(nombreArray,agregarStoragePedido(carritoFinalizado));
+  let cliente = document.getElementById('fname');//le saque el value porque me trababa el proceso y no pude encontrar el error
+  
+  
+  guardarStorage(nombreArray,agregarStoragePedido(carritoFinalizado,cliente));
   vaciarCarrito();
   
 }
@@ -344,7 +347,7 @@ guardarStorage(nombreArray,carritoVacio);
 }
 
 //funcion que agrega un pedido terminado al storage
-function agregarStoragePedido(pedidoTerminado) {
+function agregarStoragePedido(pedidoTerminado,cliente) {
   let lastItem = 0;
 
   let storage = localStorage.getItem("pedido")
